@@ -11,20 +11,20 @@ class UsersController < ApplicationController
 		@category_slug = params[:category];
 		@category = Job.where(slug: @category_slug).first
 
-		get_user
+		get_user('job_id')
 	end
 
 	def ville
 		@category_slug = params[:ville];
 		@category = Ville.where(slug: @category_slug).first
 
-		get_user
+		get_user('ville_id')
 		
 	end
 
-	def get_user
+	def get_user(field)
 		if  @category.present?
-			@users = User.where(job_id: @category.id)
+			@users = User.where(field.to_sym => @category.id)
 		else
 			not_found
 		end
