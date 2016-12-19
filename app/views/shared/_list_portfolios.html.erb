@@ -1,0 +1,19 @@
+
+<% @users.each do |user| %>
+	<div>
+		<li><%= user.id %></li>
+		<li><%= user.firstname %></li>
+		<li><%= user.lastname %></li>
+		<li><%= user.email %></li>
+		<li><%= user.job.label if user.job  %></li>
+		<li><%= user.visite %> visite</li>
+		<li></li>
+		<li><%= user.portfolio.url if user.portfolio %></li>
+		<li><%= user.portfolio.like if user.portfolio %> like</li>
+		<li><%= user.portfolio.visite if user.portfolio %> visite</li>
+	</div>
+
+	<br><br>
+	
+
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "users#index"
+
   get 'skills/index'
 
   get 'skills/new'
@@ -10,11 +12,12 @@ Rails.application.routes.draw do
 
 
   get 'portfolios/new'
+  get '/:category' => "users#category"
   get 'portfolios/index'
   post 'portfolios/create'
 
-  get 'users/show'
-
+  get 'portfolio/:slug' => "users#show", :as => :show_portfolio
+ 
   get 'users/index'
 
 

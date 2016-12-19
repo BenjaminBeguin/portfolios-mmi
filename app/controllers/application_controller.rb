@@ -16,7 +16,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :job_id])
   end
 
+  def after_sign_out_path_for(resource)
+    "http://www.google.com"
+  end
 
+  	def not_found
+    	#redirect_to root_path
+    	redirect_to "/"   
+   end
 
 
 end
