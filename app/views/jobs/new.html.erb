@@ -1,2 +1,29 @@
-<h1>Jobs#new</h1>
-<p>Find me in app/views/jobs/new.html.erb</p>
+<h1>Nouveau job</h1>
+
+<% if @job %>
+    <%= form_for @job, url: {action: "create"} do |f| %>
+
+	    <% if !@job.errors.full_messages.blank? %>
+	        <h2 class="alert">
+	            <% @job.errors.full_messages.each do |error| %>
+	                <span><%= error %></span>
+	            <% end %>
+	        </h2>
+	    <% end %>
+     
+        <div class="fields_wrapper">
+            <div class="field">
+                <%= f.label :label %>
+                <%= f.text_field :label, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
+            </div>
+        </div>
+
+        <div class="actions">
+            <%= f.submit "Create" %>
+        </div>
+        
+    <% end %>
+
+<% else %>
+        <%= @message %>
+<% end %>

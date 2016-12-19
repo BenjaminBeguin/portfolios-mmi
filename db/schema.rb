@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219152214) do
+ActiveRecord::Schema.define(version: 20161219172451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 20161219152214) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string   "url"
-    t.integer  "visite"
-    t.integer  "like"
+    t.integer  "visite",     default: 0
+    t.integer  "like",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "skills", force: :cascade do |t|
@@ -65,12 +65,12 @@ ActiveRecord::Schema.define(version: 20161219152214) do
     t.inet     "last_sign_in_ip"
     t.string   "firstname"
     t.string   "lastname"
-    t.string   "job"
-    t.integer  "visites"
+    t.integer  "visite",                 default: 0
     t.integer  "portfolio_id"
     t.integer  "job_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "slug"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

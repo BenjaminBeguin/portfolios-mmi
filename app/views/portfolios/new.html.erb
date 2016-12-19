@@ -1,0 +1,21 @@
+<h1>Nouveau portfolio</h1>
+
+<% if @portfolio %>
+    <%= form_for @portfolio, url: {action: "create"} do |f| %>
+     
+        <div class="fields_wrapper">
+            <div class="field">
+                <%= f.label :url %>
+                <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
+            </div>
+        </div>
+
+        <div class="actions">
+            <%= f.submit "Create" %>
+        </div>
+        
+    <% end %>
+
+<% else %>
+        <%= @message %>
+<% end %>
