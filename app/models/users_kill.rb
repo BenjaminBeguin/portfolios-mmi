@@ -1,2 +1,0 @@
-class UsersKill < ApplicationRecord
-end
