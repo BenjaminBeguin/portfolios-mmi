@@ -13,7 +13,6 @@ class PortfoliosController < ApplicationController
             if @portfolio.save 
                 redirect_to action: "index"
             else
-                @categories = Category.all;
                 render :new  
             end
         end

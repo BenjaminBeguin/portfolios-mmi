@@ -2,7 +2,17 @@
 
 <% if @portfolio %>
     <%= form_for @portfolio, url: {action: "create"} do |f| %>
-     
+     	
+
+     	 <% if !@portfolio.errors.full_messages.blank? %>
+	        <h2 class="alert">
+	            <% @portfolio.errors.full_messages.each do |error| %>
+	                <span><%= error %></span>
+	            <% end %>
+	        </h2>
+	    <% end %>
+
+
         <div class="fields_wrapper">
             <div class="field">
                 <%= f.label :url %>

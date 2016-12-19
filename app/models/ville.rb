@@ -1,4 +1,4 @@
-class Job < ApplicationRecord
+class Ville < ApplicationRecord
 
 	belongs_to :user
 
@@ -28,3 +28,4 @@ class Job < ApplicationRecord
 	 end
 
 end
+

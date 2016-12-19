@@ -15,7 +15,6 @@ class JobsController < ApplicationController
         if @job.save 
             redirect_to action: "index"
         else
-            @categories = Job.all;
             render :new  
         end
 

@@ -6,7 +6,9 @@ class User < ApplicationRecord
 
 	has_many :skills
 	has_one :portfolio
+
 	belongs_to :job
+	belongs_to :ville
 
 	validates :firstname, presence: true
 	validates :lastname, presence: true
@@ -20,6 +22,10 @@ class User < ApplicationRecord
 
 	def add_slug_if_not_exist
 	    self.slug = self.to_slug
+	end
+
+	def name
+	   self.firstname + " " + self.lastname
 	end
 
 	def to_slug
