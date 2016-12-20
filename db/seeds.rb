@@ -9,6 +9,7 @@
 
 # User.delete_all
  Portfolio.delete_all
+ Ville.update_all(like: 0);
 
 
 # 50.times do

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'portfolios/index'
   post 'portfolios/create'
 
+  post 'portfolios/vote/:id' => "portfolios#vote", :as => :porfolios_add_vote
+
   get 'portfolio/:slug' => "users#show", :as => :show_portfolio
  
   get 'users/index'

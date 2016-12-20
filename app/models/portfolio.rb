@@ -20,4 +20,17 @@ class Portfolio < ApplicationRecord
 		end
 	end
 
+
+	def increment_like
+		update(like: like + 1)
+	end
+
+	def increment_visite
+		update(visite: visite + 1)
+	end
+
+	def decrement_like
+		update(like: like - 1)
+	end
+
 end

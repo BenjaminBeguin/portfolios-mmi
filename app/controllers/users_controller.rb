@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	def show
 		@user = User.where( slug: params[:slug]).first or not_found
+		@user.increment_visite
 	end
 
 	def index

@@ -25,5 +25,14 @@ class Ville < ApplicationRecord
 		ret.split('.').join('_').downcase
 	 end
 
+
+	def increment_like
+	 	update(like: like + 1)
+	end
+
+	def decrement_like
+	 	update(like: like - 1)
+	end
+
 end
 

@@ -1,6 +1,8 @@
 class PortfoliosController < ApplicationController
     def index
-        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE);
+
+        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
+
     end
 
     def new
@@ -14,6 +16,8 @@ class PortfoliosController < ApplicationController
 
         get_portfolios('job_id')
     end
+
+
 
     def ville
         @category_slug = params[:ville];
@@ -72,5 +76,36 @@ class PortfoliosController < ApplicationController
         end
     end
 
+
+    def vote
+        if user_signed_in?
+            @portfolio = Portfolio.find(params[:id])
+            already_voted = Like.where(user_id: current_user.id , portfolio_id: @portfolio.id).first;
+            if !already_voted
+                @portfolio.increment_like
+                @portfolio.user.ville.increment_like
+                @vote = Like.create(user_id: current_user.id , portfolio_id: @portfolio.id)
+            else
+                @portfolio.decrement_like
+                @portfolio.user.ville.decrement_like
+
+                already_voted.destroy
+            end
+            redirect_to '/'
+        else
+            flash[:error] = 'You need to be signed in to vote'
+            redirect_to new_user_session_path 
+        end
+    end
+
+
+    def add_visite
+        @portfolios.find_by_id(params[:id]);
+        @portfolio.increment_visite
+    end
+
+
+
+   
 
 end

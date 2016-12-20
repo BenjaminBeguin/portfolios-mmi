@@ -1,0 +1,8 @@
+<%= link_to porfolios_add_vote_path(id: portfolio.id ), remote: !user_signed_in? , method: :post, :class => "post-likes" do %>
+    <% if @portfolio_voted.include?(portfolio.id) %>
+        <img src='/assets/images/icons/like_active.svg' alt="" class="active">
+    <% else %>
+        <img src='/assets/images/icons/like_inactive.svg' alt="">
+    <% end %> 
+    <span><%= portfolio.like %></span>
+<% end %>

@@ -3,9 +3,30 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :all_jobs
-	before_filter :all_villes
+  before_filter :all_villes
+	before_filter :all_portfolio_voted
 
   PORTFOLIO_PER_PAGE = 50;
+
+  def all_portfolio_voted
+      @portolio_voted = post_like_unlike
+    
+  end
+
+  def post_like_unlike
+      if user_signed_in?
+          portfolios_voted = Like.select(:portfolio_id).where(user_id: current_user.id)
+          @portfolio_voted = [];
+
+          portfolios_voted.each do |portfolio_voted|
+              @portfolio_voted << portfolio_voted.portfolio_id
+          end
+
+          @portfolio_voted            
+      else
+          @portfolio_voted = [];
+      end
+  end
 
 	def all_jobs
       @all_jobs = Job.all

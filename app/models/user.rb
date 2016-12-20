@@ -44,6 +44,11 @@ class User < ApplicationRecord
         ret.split('.').join('_').downcase
     end
 
+
+    def increment_visite
+		update(visite: visite + 1)
+	end
+
     #-------------- end Slug ------------- #
 
 end
