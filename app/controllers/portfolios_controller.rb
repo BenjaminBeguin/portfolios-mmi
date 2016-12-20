@@ -1,9 +1,34 @@
 class PortfoliosController < ApplicationController
     def index
+        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE);
     end
 
     def new
     	@portfolio = Portfolio.new
+    end
+
+
+    def category
+        @category_slug = params[:category];
+        @category = Job.where(slug: @category_slug).first
+
+        get_portfolios('job_id')
+    end
+
+    def ville
+        @category_slug = params[:ville];
+        @category = Ville.where(slug: @category_slug).first
+
+        get_portfolios('ville_id') 
+    end
+
+
+    def get_portfolios(field)
+        if  @category.present?
+            @portfolios = Portfolio.joins(:user).where(users: {field.to_sym => @category.id}).page(params[:page]).per(PORTFOLIO_PER_PAGE);
+        else
+            not_found
+        end
     end
 
     def create       

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :all_jobs
 	before_filter :all_villes
 
-  PORTFOLIO_PER_PAGE = 2;
+  PORTFOLIO_PER_PAGE = 50;
 
 	def all_jobs
       @all_jobs = Job.all
@@ -13,6 +13,20 @@ class ApplicationController < ActionController::Base
 
   def all_villes
       @all_villes = Ville.all
+  end
+
+  def is_admin
+      Portfolio.current_user = current_user
+      if !user_signed_in? || !current_user.admin
+        redirect_to "/" 
+      end
+  end
+
+  def is_connected
+      Portfolio.current_user = current_user
+      if !user_signed_in?
+        redirect_to "/" 
+      end
   end
 
   protected

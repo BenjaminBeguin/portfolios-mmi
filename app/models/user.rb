@@ -24,6 +24,10 @@ class User < ApplicationRecord
 	    self.slug = self.to_slug
 	end
 
+	def have_pf
+		self.portfolio.present?
+	end
+
 	def name
 	   self.firstname + " " + self.lastname
 	end

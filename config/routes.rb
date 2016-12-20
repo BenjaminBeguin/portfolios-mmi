@@ -4,20 +4,24 @@ Rails.application.routes.draw do
   get 'villes/index'
   get 'villes/new'
   post 'villes/create'
+  get 'villes/edit/:id' => "villes#edit", :as => :villes_edit
+  patch 'villes/update'
 
 
-  root "users#index"
+  root "portfolios#index"
 
   get 'skills/index'
   get 'skills/new'
 
   get 'jobs/index'
   get 'jobs/new'
+  get 'jobs/edit/:id' => "jobs#edit", :as => :jobs_edit
   post 'jobs/create'
+  patch 'jobs/update'
 
   get 'portfolios/new'
-  get '/:category' => "users#category",  :as => :show_category
-  get '/city/:ville' => "users#ville",  :as => :show_city
+  get '/:category' => "portfolios#category",  :as => :show_category
+  get '/city/:ville' => "portfolios#ville",  :as => :show_city
   get 'portfolios/index'
   post 'portfolios/create'
 

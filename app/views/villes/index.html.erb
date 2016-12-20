@@ -5,6 +5,11 @@
 	<div>
 		<li><%= ville.label %></li>
 		<li><%= ville.like %></li>
+		<li>
+			<%= link_to villes_edit_path(id: ville.id ), method: :get do %>
+				edit
+			<% end %>
+		</li>
 	
 	</div>
 

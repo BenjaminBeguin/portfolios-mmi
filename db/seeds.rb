@@ -7,24 +7,24 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.delete_all
-Portfolio.delete_all
+# User.delete_all
+ Portfolio.delete_all
 
 
-50.times do
-	User.create(
-		firstname: Faker::Name.first_name,
-		lastname: Faker::Name.last_name,
-		email: Faker::Internet.email,
-		password: 'testpassword',
-		job_id: Job.order("RANDOM()").first.id,
-		ville_id: Ville.order("RANDOM()").first.id,
-	)
-end
+# 50.times do
+# 	User.create(
+# 		firstname: Faker::Name.first_name,
+# 		lastname: Faker::Name.last_name,
+# 		email: Faker::Internet.email,
+# 		password: 'testpassword',
+# 		job_id: Job.order("RANDOM()").first.id,
+# 		ville_id: Ville.order("RANDOM()").first.id,
+# 	)
+# end
 
-50.times do | i |
+10.times do | i |
 	Portfolio.create(
-		user_id: i ,
+		user_id: User.order("RANDOM()").first.id,
 		url: Faker::Internet.url('example.com'),
 	)
 end

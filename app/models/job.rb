@@ -1,6 +1,5 @@
 class Job < ApplicationRecord
 
-	belongs_to :user
 
 	validates :label, presence: true, uniqueness: true
 	validates :slug, uniqueness: true

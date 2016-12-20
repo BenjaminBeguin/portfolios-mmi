@@ -1,38 +1,42 @@
-<%= @users.total_count %> posts <br><br>
-<% @users.each do |user| %>
+<%= @portfolios.total_count %> posts <br><br>
+<% @portfolios.each do |portfolio| %>
 	<div>
 		<li>
-			<%= link_to show_portfolio_path(slug: user.slug ), class:"post-author", method: :get do %>
+			<%= link_to show_portfolio_path(slug: portfolio.user.slug ), class:"post-author", method: :get do %>
 				Detail du profils
 			<% end %>
 		</li>
 		
 
 
-		<li><%= user.id %></li>
-		<li><%= user.firstname %></li>
-		<li><%= user.lastname %></li>
-		<li><%= user.email %></li>
+		<li><%= portfolio.user.id %></li>
+		<li><%= portfolio.user.firstname %></li>
+		<li><%= portfolio.user.lastname %></li>
+		<li><%= portfolio.user.email %></li>
+		<li>have pf = <%= portfolio.user.have_pf %></li>
+		<li>admin : <%= portfolio.user.admin %></li>
+	
 
 
 		<li>
-			<%= link_to show_category_path(category: user.job.slug ), class:"post-author", method: :get do %>
-				<%= user.job.label %>
+			<%= link_to show_category_path(category: portfolio.user.job.slug ), class:"post-author", method: :get do %>
+				<%= portfolio.user.job.label %>
 			<% end %>
 		</li>
 
 
 
-		<li><%= user.visite %> visite</li>
+		<li><%= portfolio.user.visite %> visite</li>
 		<li>
-			<%= link_to show_city_path(ville:  user.ville.slug ), class:"post-author", method: :get do %>
-				<%= user.ville.label %>
+			<%= link_to show_city_path(ville:  portfolio.user.ville.slug ), class:"post-author", method: :get do %>
+				<%= portfolio.user.ville.label %>
 			<% end %>
 		</li>
 		<li></li>
-		<li><%= user.portfolio.url if user.portfolio %></li>
-		<li><%= user.portfolio.like if user.portfolio %> like</li>
-		<li><%= user.portfolio.visite if user.portfolio %> visite</li>
+		<li><%= portfolio.url if portfolio %></li>
+		<li> published : <%= portfolio.published if portfolio %></li>
+		<li><%= portfolio.like if portfolio %> like</li>
+		<li><%= portfolio.visite if portfolio %> visite</li>
 	</div>
 
 	<br><br>
@@ -40,4 +44,4 @@
 
 <% end %>
 
-<%= paginate @users %>
+<%= paginate @portfolios %>
