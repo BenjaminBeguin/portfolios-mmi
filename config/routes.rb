@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'portfolio/:slug' => "users#show", :as => :show_portfolio
  
   get 'users/index'
+  get 'users/edit/portfolio' => "portfolios#edit", :as => :edit_portfolio
+  patch 'users/edit/portfolio/update' => "portfolios#update"
 
 
   Rails.application.routes.draw do

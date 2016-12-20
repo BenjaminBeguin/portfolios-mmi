@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :all_jobs
 	before_filter :all_villes
 
-
+  PORTFOLIO_PER_PAGE = 2;
 
 	def all_jobs
       @all_jobs = Job.all

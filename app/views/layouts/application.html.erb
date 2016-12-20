@@ -21,8 +21,9 @@
             <div class="profile">
                 <p><%= current_user.name %></p>
                 <div class="collapse">
-                    <%= link_to "Profile", edit_user_registration_path, method: :get %>
+                    <%= link_to "Modifier", edit_user_registration_path, method: :get %>
                     <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                    <%= link_to "Modifier portfolio", edit_portfolio_path, method: :get %>
                 </div>
             </div>
             

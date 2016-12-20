@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		@users = User.all;
+		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE);
 	end
 
   	def category
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
 	def get_user(field)
 		if  @category.present?
-			@users = User.where(field.to_sym => @category.id)
+			@users = User.where(field.to_sym => @category.id).page(params[:page]).per(PORTFOLIO_PER_PAGE);
 		else
 			not_found
 		end
