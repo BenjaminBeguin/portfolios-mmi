@@ -9,7 +9,23 @@
 
 # User.delete_all
  Portfolio.delete_all
+ # Job.delete_all
+ 
  Ville.update_all(like: 0);
+
+10.times do
+	Ville.create(
+		label: Faker::Address.city,
+		like: 0
+	)
+end
+
+Job.create(label: "Développeur")
+Job.create(label: "Designer")
+Job.create(label: "Graphiste")
+Job.create(label: "Référenceur")
+Job.create(label: "Intégrateur")
+Job.create(label: "Référenceur")
 
 
 # 50.times do
@@ -23,7 +39,7 @@
 # 	)
 # end
 
-10.times do | i |
+10.times do
 	Portfolio.create(
 		user_id: User.order("RANDOM()").first.id,
 		url: Faker::Internet.url('example.com'),
