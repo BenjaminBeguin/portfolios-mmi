@@ -50,6 +50,7 @@ Rails.application.routes.draw do
 
   get '/admin/home' => 'users#admin_home', :as => :admin_home
   get '/admin/portfolio/:id' => 'users#admin_edit_portfolio', :as => :admin_edit_portfolio
+  get '/admin/portfolio/action/publish' => 'portfolios#admin_toggle_publish' , :as => :admin_toggle_publish
 
 
 

@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
     def index
-        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
+        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id).published;
     end
 
     def new
@@ -11,7 +11,6 @@ class PortfoliosController < ApplicationController
     def category
         @category_slug = params[:category];
         @category = Job.where(slug: @category_slug).first
-
         get_portfolios('job_id')
     end
 
@@ -27,7 +26,7 @@ class PortfoliosController < ApplicationController
 
     def get_portfolios(field)
         if  @category.present?
-            @portfolios = Portfolio.joins(:user).where(users: {field.to_sym => @category.id}).page(params[:page]).per(PORTFOLIO_PER_PAGE);
+            @portfolios = Portfolio.joins(:user).where(users: {field.to_sym => @category.id}).page(params[:page]).per(PORTFOLIO_PER_PAGE).published;
         else
             not_found
         end
@@ -65,7 +64,12 @@ class PortfoliosController < ApplicationController
             end
 
             if @porfolio
-                @porfolio.update(params.require(:portfolio).permit(:url));
+                if current_user.admin == true
+                    @porfolio.update(params.require(:portfolio).permit(:url, :like));
+                else
+                    @porfolio.update(params.require(:portfolio).permit(:url));    
+                end
+
                 if @porfolio.save    
                     if current_user.admin == true
                        redirect_to admin_home_path 
@@ -87,6 +91,20 @@ class PortfoliosController < ApplicationController
             redirect_to new_user_session_path 
         end
     end
+
+    def admin_toggle_publish
+        is_admin
+        @portfolio_to_update = Portfolio.find_by_id(params[:id]) or not_found
+        if @portfolio_to_update.published
+            @portfolio_to_update.published = false
+        else 
+            @portfolio_to_update.published = true
+        end
+        
+        @portfolio_to_update.save!
+        redirect_to admin_home_path
+    end
+
 
 
     def vote

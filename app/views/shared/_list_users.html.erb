@@ -11,10 +11,10 @@
 			<td>Visites</td>
 			<td>portfolio</td>
 			<td>Like</td>
+			<td>Edit portfolio</td>
 			<td>Published</td>
 			<td>Admin</td>
 			<td>Profils</td>
-			<td>Edit portfolio</td>
 
 		</tr>
 <% @users.each do |user| %>
@@ -26,9 +26,34 @@
 			<td><%= user.email %></td>
 			<td><%= user.job.label %></td>
 			<td><%= user.visite %></td>
-			<td><%= user.portfolio.url if user.portfolio %></td>
-			<td><%= user.portfolio.like if user.portfolio %></td>
-			<td><%= user.portfolio.published if user.portfolio %></td>
+
+			<% if user.portfolio %>
+				<%= form_for user.portfolio, url: {action: "update", controller: "portfolios"} do |f| %>
+				<td> <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%></td>
+				<td>		
+				 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
+
+				  <%= f.hidden_field :id %>
+				  
+				  </td>
+
+
+				  <td>
+				  	<%= f.submit "Update" %>
+	    		<% end  %>
+				  </td>
+				
+			<% else  %>
+				<td></td>
+				<td></td>
+				<td></td>
+			<% end %>
+			
+			<td>
+				<%= link_to admin_toggle_publish_path(id: user.portfolio.id ), class:"post-author", method: :get do %>
+					<%= user.portfolio.published  %>
+				<% end if user.portfolio %>
+			</td>
 
 			<td><%= user.admin %></td>
 			<td>
@@ -37,9 +62,6 @@
 				<% end %>
 				
 			</td>
-			<td><%= link_to admin_edit_portfolio_path(id: user.portfolio.id ), class:"post-author", method: :get do  %>
-				link
-				<% end if user.portfolio  %></td>
 		</tr>
 
 
