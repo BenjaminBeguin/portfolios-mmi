@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'maison_neuebold';
+    src: url('../fonts/maisonneue-bold-webfont.woff2') format('woff2'),
+         url('../fonts/maisonneue-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+$bold: 'maison_neuebold';
+
+@font-face {
+    font-family: 'maison_neuebook';
+    src: url('../fonts/maisonneue-book-webfont.woff2') format('woff2'),
+         url('../fonts/maisonneue-book-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+$book: 'maison_neuebook';

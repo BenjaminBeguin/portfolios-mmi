@@ -1,16 +1,26 @@
-<h1>All job</h1>
+<div class="admin_bar col-sm-2">
+	<%= render "shared/admin_bar" %>
+</div>
 
+<div class="admin_content col-sm-10">
+	<div class="admin_header">
+		<h1 class="center">Type - <%= @jobs.count %>  </h1>
+		
+		<%= button_to jobs_new_path, method: :get , class: "btn btn-success" do %>
+			Ajouter un type
+		<% end %>
 
-<%= link_to jobs_new_path, method: :get do %>
-					Nouvelle job
-				<% end %>
-<table border="1">
-	<tr>
-		<td>id</td>
-		<td>Label</td>
-		<td>Slug</td>
-		<td>Edit</td>
-	</tr>
+	</div>
+
+	<table class="table table-striped admin_table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Label</th>
+				<th>Slug</th>
+				<th>Edit</th>
+			</tr>			
+		</thead>
 
 	<% @jobs.each do |job| %>
 		<tr>

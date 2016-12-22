@@ -6,10 +6,19 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- For admin -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
   </head>
 
   <body>
-    <div class="connect">
+ <!--    <div class="connect">
         <% if !user_signed_in? %>
             <div class="not-connected">
             <%= link_to "Sign in", new_user_session_path, method: :get %>
@@ -27,20 +36,15 @@
                 </div>
             </div>
 
-            <div class="admin_header">
-                <%= link_to "Job", jobs_index_path, method: :get %>
-                <%= link_to "Ville", villes_index_path, method: :get %>
-                <%= link_to "Home", admin_home_path, method: :get %>
-            </div>
             
         <% end %>
-    </div>
-
-    --------------- end header -------------
+    </div> -->
 
 
-  		<p class="notice"><%= notice %></p>
-       	<p class="alert"><%= alert %></p>
+
+
+  		<p class="push notice"><%= notice %></p>
+       	<p class="push alert"><%= alert %></p>
 
        	
     <%= yield %>

@@ -1,22 +1,28 @@
-<%= @users.total_count %> user <br><br>
 
+<div class="admin_header">
+	<h1 class="center">User - <%= @users.total_count %>  </h1>
 
-<table border="1">
+	<button type="button" class="btn btn-success">Ajouter un user</button>
+</div>
+
+<table class="table table-striped admin_table">
+	<thead>
 		<tr>
-			<td>id</td>
-			<td>Nom</td>
-			<td>Prenom</td>
-			<td>Email</td>
-			<td>Profils</td>
-			<td>Visites</td>
-			<td>portfolio</td>
-			<td>Like</td>
-			<td>Edit portfolio</td>
-			<td>Published</td>
-			<td>Admin</td>
-			<td>Profils</td>
+			<th>id</th>
+			<th>Nom</th>
+			<th>Prenom</th>
+			<th>Email</th>
+			<th>Profils</th>
+			<th>Visites</th>
+			<th>portfolio</th>
+			<th class="like">Like</th>
+			<th>Modifier</th>
+			<th>Published</th>
+			<th>Admin</th>
+			<th>Profils</th>
 
 		</tr>
+	</thead>
 <% @users.each do |user| %>
 	
 		<tr>
@@ -30,7 +36,7 @@
 			<% if user.portfolio %>
 				<%= form_for user.portfolio, url: {action: "update", controller: "portfolios"} do |f| %>
 				<td> <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%></td>
-				<td>		
+				<td class="like">		
 				 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
 
 				  <%= f.hidden_field :id %>
@@ -58,7 +64,7 @@
 			<td><%= user.admin %></td>
 			<td>
 				<%= link_to show_portfolio_path(slug: user.slug ), class:"post-author", method: :get do %>
-				Detail du profils
+				Profils
 				<% end %>
 				
 			</td>
