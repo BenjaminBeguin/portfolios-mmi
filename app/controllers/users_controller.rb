@@ -32,6 +32,16 @@ class UsersController < ApplicationController
 	end
 
 	def admin_home
+		is_admin
 		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
 	end
+
+	def admin_edit_portfolio
+		is_admin
+	    @portfolio = Portfolio.where(id: params[:id]).first;
+	    if !@portfolio
+	        redirect_to portfolios_new_path 
+	    end
+	end
+
 end

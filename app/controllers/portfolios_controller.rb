@@ -57,14 +57,28 @@ class PortfoliosController < ApplicationController
     end
 
     def update       
-        if user_signed_in?
+        if user_signed_in? || current_user.admin == true
             @porfolio = Portfolio.where(user_id: current_user.id).first
+
+            if current_user.admin == true
+                @porfolio = Portfolio.where(id: params[:portfolio][:id]).first
+            end
+
             if @porfolio
                 @porfolio.update(params.require(:portfolio).permit(:url));
-                if @porfolio.save                    
-                    redirect_to edit_user_registration_path
+                if @porfolio.save    
+                    if current_user.admin == true
+                       redirect_to admin_home_path 
+                    else
+                         redirect_to edit_user_registration_path
+                    end                
                 else
-                    render action: 'edit'
+                    if current_user.admin == true
+                        redirect_to admin_edit_portfolio_path(id: params[:portfolio][:id])
+                    else
+                        render action: 'edit'
+                    end
+                    
                 end
             else
                 redirect_to new_user_session_path 

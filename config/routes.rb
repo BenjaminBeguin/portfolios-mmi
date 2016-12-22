@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   # ------------ admin -------- #
 
   get '/admin/home' => 'users#admin_home', :as => :admin_home
+  get '/admin/portfolio/:id' => 'users#admin_edit_portfolio', :as => :admin_edit_portfolio
+
 
 
 
