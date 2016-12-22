@@ -1,6 +1,6 @@
 class VillesController < ApplicationController
   def index
-		@villes = Ville.all
+		@villes = Ville.all.order(:id);
 	end
 
 	def new

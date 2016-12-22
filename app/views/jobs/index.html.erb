@@ -1,19 +1,30 @@
 <h1>All job</h1>
 
 
-<% @jobs.each do |job| %>
-	<div>
-		<li><%= job.label %></li>
-		<li>
-			<%= link_to jobs_edit_path(id: job.id ), class:"post-author", method: :get do %>
-				edit
-			<% end %>
-		</li>
-	
-	</div>
+<%= link_to jobs_new_path, method: :get do %>
+					Nouvelle job
+				<% end %>
+<table border="1">
+	<tr>
+		<td>id</td>
+		<td>Label</td>
+		<td>Slug</td>
+		<td>Edit</td>
+	</tr>
 
-	<br><br>
-	
+	<% @jobs.each do |job| %>
+		<tr>
+			<td><%= job.id %></td>
+			<td><%= job.label %></td>
+			<td><%= job.slug %></td>
+			<td>
+				<%= link_to jobs_edit_path(id: job.id ), class:"post-author", method: :get do %>
+					edit
+				<% end %>
+			</td>
+		</tr>
 
-<% end %>
+	<% end %>
+
+</table>
 

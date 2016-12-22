@@ -1,8 +1,6 @@
 class PortfoliosController < ApplicationController
     def index
-
         @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
-
     end
 
     def new

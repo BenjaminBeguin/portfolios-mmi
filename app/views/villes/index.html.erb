@@ -1,20 +1,33 @@
+
+
 <h1>All ville</h1>
 
+<%= link_to villes_new_path, method: :get do %>
+					Nouvelle ville
+				<% end %>
 
-<% @villes.each do |ville| %>
-	<div>
-		<li><%= ville.label %></li>
-		<li><%= ville.like %></li>
-		<li>
-			<%= link_to villes_edit_path(id: ville.id ), method: :get do %>
-				edit
-			<% end %>
-		</li>
-	
-	</div>
+<table border="1">
+	<tr>
+		<td>id</td>
+		<td>Label</td>
+		<td>Slug</td>
+		<td>Edit</td>
+	</tr>
 
-	<br><br>
-	
+	<% @villes.each do |ville| %>
+		<tr>
+			<td><%= ville.id %></td>
+			<td><%= ville.label %></td>
+			<td><%= ville.slug %></td>
+			<td>
+				<%= link_to villes_edit_path(id: ville.id ), method: :get do %>
+					edit
+				<% end %>
+			</td>
+		</tr>
 
-<% end %>
+	<% end %>
+
+</table>
+
 

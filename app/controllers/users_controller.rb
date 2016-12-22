@@ -30,4 +30,8 @@ class UsersController < ApplicationController
 			not_found
 		end
 	end
+
+	def admin_home
+		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
+	end
 end

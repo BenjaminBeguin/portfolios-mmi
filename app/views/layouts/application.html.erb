@@ -26,6 +26,12 @@
                     <%= link_to "Modifier portfolio", edit_portfolio_path, method: :get %>
                 </div>
             </div>
+
+            <div class="admin_header">
+                <%= link_to "Job", jobs_index_path, method: :get %>
+                <%= link_to "Ville", villes_index_path, method: :get %>
+                <%= link_to "Home", admin_home_path, method: :get %>
+            </div>
             
         <% end %>
     </div>
