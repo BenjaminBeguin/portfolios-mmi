@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
 	def admin_home
 		is_admin
-		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id);
+		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE  * 4).order(:id);
 	end
 
 	def admin_edit_portfolio

@@ -1,9 +1,11 @@
 class VillesController < ApplicationController
   def index
+    is_admin
 		@villes = Ville.all.order(:id);
 	end
 
 	def new
+    is_admin
 		@ville = Ville.new
 	end
 
