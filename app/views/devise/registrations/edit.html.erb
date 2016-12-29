@@ -31,6 +31,9 @@
     <%= f.text_field :lastname, autofocus: true %>
   </div>
 
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+
 
   <div class="field">
       <%= f.label "category", :class => "form_title asterisk"%>

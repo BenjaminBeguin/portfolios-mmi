@@ -33,6 +33,12 @@ gem 'jbuilder', '~> 2.5'
 # devise
 gem 'devise'
 
+#image
+gem 'carrierwave', '~> 1.0'
+
+gem 'rmagick', '~> 2.15', '>= 2.15.4'
+gem "mini_magick"
+
 # faker
 gem 'faker', '~> 1.6', '>= 1.6.3'
 

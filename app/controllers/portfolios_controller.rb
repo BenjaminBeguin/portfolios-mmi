@@ -4,7 +4,15 @@ class PortfoliosController < ApplicationController
     end
 
     def new
-    	@portfolio = Portfolio.new
+        if user_signed_in?
+           if !Portfolio.where(user_id: current_user.id).first
+    	       @portfolio = Portfolio.new
+           else
+                redirect_to edit_portfolio_path
+           end
+        else
+            redirect_to edit_user_registration_path   
+        end
     end
 
 
@@ -34,7 +42,7 @@ class PortfoliosController < ApplicationController
 
     def create       
         if user_signed_in?
-            @portfolio = Portfolio.new(params.require(:portfolio).permit(:url));
+            @portfolio = Portfolio.new(params.require(:portfolio).permit(:url, :picture, :picture_cache));
             @portfolio.user_id = current_user.id 
             if @portfolio.save 
                 redirect_to action: "index"
@@ -59,15 +67,15 @@ class PortfoliosController < ApplicationController
         if user_signed_in? || current_user.admin == true
             @porfolio = Portfolio.where(user_id: current_user.id).first
 
-            if current_user.admin == true
+            if current_user.admin == true && params[:portfolio][:id]
                 @porfolio = Portfolio.where(id: params[:portfolio][:id]).first
             end
 
             if @porfolio
                 if current_user.admin == true
-                    @porfolio.update(params.require(:portfolio).permit(:url, :like));
+                    @porfolio.update(params.require(:portfolio).permit(:url, :like, :picture, :picture_cache));
                 else
-                    @porfolio.update(params.require(:portfolio).permit(:url));    
+                    @porfolio.update(params.require(:portfolio).permit(:url, :picture, :picture_cache));    
                 end
 
                 if @porfolio.save    
@@ -85,7 +93,7 @@ class PortfoliosController < ApplicationController
                     
                 end
             else
-                redirect_to new_user_session_path 
+                redirect_to root_path
             end
         else
             redirect_to new_user_session_path 

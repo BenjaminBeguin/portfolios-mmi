@@ -1,4 +1,7 @@
 class Portfolio < ApplicationRecord
+
+	mount_uploader :picture, PortfolioUploader
+
 	belongs_to :user
 	has_many :likes
 

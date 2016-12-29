@@ -18,6 +18,11 @@
                 <%= f.label :url %>
                 <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
             </div>
+
+            
+            <%= image_tag(@portfolio.picture_url) if @portfolio.picture? %>
+             <%= f.file_field :picture %>
+             <%= f.hidden_field :picture_cache %>
         </div>
 
         <div class="actions">

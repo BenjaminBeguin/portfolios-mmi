@@ -9,17 +9,18 @@
 	<thead>
 		<tr>
 			<th>id</th>
+			<th>image</th>
 			<th>Nom</th>
-			<th>Prenom</th>
 			<th>Email</th>
 			<th>Profils</th>
 			<th>Visites</th>
 			<th>portfolio</th>
+			<th>image</th>
 			<th class="like">Like</th>
 			<th>Modifier</th>
 			<th>Published</th>
 			<th>Admin</th>
-			<th>Profils</th>
+			<!-- <th>Profils</th> -->
 
 		</tr>
 	</thead>
@@ -27,8 +28,8 @@
 	
 		<tr>
 			<td><%= user.id %></td>
-			<td><%= user.firstname %></td>
-			<td><%= user.lastname %></td>
+			<td><%= image_tag(user.avatar_url, style: "max-width: 50px") if user.avatar? %></td>
+			<td><%= user.firstname %> <%= user.lastname %></td>
 			<td><%= user.email %></td>
 			<td><%= user.job.label %></td>
 			<td><%= user.visite %></td>
@@ -36,24 +37,27 @@
 			<% if user.portfolio %>
 				<%= form_for user.portfolio, url: {action: "update", controller: "portfolios"} do |f| %>
 				<td> <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%></td>
-				<td class="like">		
-				 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
 
-				  <%= f.hidden_field :id %>
-				  
+				<td><%= image_tag(user.portfolio.picture_url, style: "max-width: 50px") if user.portfolio.picture? %></td>
+				<td class="like">		
+					 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
+
+					  <%= f.hidden_field :id %>
 				  </td>
 
 
 				  <td>
 				  	<%= f.submit "Update" %>
-	    		<% end  %>
 				  </td>
+	    	<% end  %>
 				
 			<% else  %>
 				<td></td>
 				<td></td>
 				<td></td>
+				<td></td>
 			<% end %>
+
 			
 			<td>
 				<%= link_to admin_toggle_publish_path(id: user.portfolio.id ), class:"post-author", method: :get do %>
@@ -62,12 +66,12 @@
 			</td>
 
 			<td><%= user.admin %></td>
-			<td>
+			<!-- <td>
 				<%= link_to show_portfolio_path(slug: user.slug ), class:"post-author", method: :get do %>
 				Profils
 				<% end %>
 				
-			</td>
+			</td> -->
 		</tr>
 
 
