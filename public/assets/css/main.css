@@ -439,3 +439,28 @@ body .admin_form .actions {
   margin-top: 30px;
   float: right;
   margin-right: 15px; }
+
+.publish-switch .switch-background {
+  background: rgba(32, 33, 33, 0.5);
+  height: 20px;
+  width: 40px;
+  border-radius: 50px;
+  position: relative;
+  transition: all 0.3s ease; }
+  .publish-switch .switch-background .switch-button {
+    transition: all 0.3s ease;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(32, 33, 33, 0.5);
+    background: #fff;
+    left: 0; }
+
+.publish-switch.active .switch-background {
+  background: #8362c6; }
+
+.publish-switch.active .switch-button {
+  border: 2px solid #8362c6;
+  left: inherit;
+  left: 20px; }

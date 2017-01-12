@@ -14,3 +14,27 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+	$('.toggle_published a').on('click', function(){
+
+
+			var button = $(this).find('.publish-switch');
+
+			console.log($(this).attr('link_publish'));
+
+			if(button.hasClass('active')){
+				button.removeClass('active');
+
+				
+				console.log($(this));
+
+				$(this).attr('href', $(this).attr('link_unpublish'));
+			}
+			else{
+				button.addClass('active');
+
+
+				$(this).attr('href', $(this).attr('link_publish'));
+			}
+		});
+})

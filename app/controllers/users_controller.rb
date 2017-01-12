@@ -36,6 +36,11 @@ class UsersController < ApplicationController
 		@users = User.page(params[:page]).per(PORTFOLIO_PER_PAGE  * 4).order(:id);
 	end
 
+	def admin_portfolios
+		is_admin
+		@portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE  * 4).order(:id);
+	end
+
 	def admin_edit_portfolio
 		is_admin
 	    @portfolio = Portfolio.where(id: params[:id]).first;

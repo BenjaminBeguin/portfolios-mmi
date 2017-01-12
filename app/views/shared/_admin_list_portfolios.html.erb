@@ -1,6 +1,6 @@
 
 <div class="admin_header">
-	<h1 class="center">User - <%= @users.total_count %>  </h1>
+	<h1 class="center">User - <%= @portfolios.total_count %>  </h1>
 
 	<button type="button" class="btn btn-success">Ajouter un user</button>
 </div>
@@ -22,20 +22,20 @@
 			<!-- <th>Profils</th> -->
 		</tr>
 	</thead>
-<% @users.each do |user| %>	
+<% @portfolios.each do |portfolio| %>	
 		<tr>
-			<td><%= user.id %></td>
-			<td><%= image_tag(user.avatar_url, style: "max-width: 50px") if user.avatar? %></td>
-			<td><%= user.firstname %> <%= user.lastname %></td>
-			<td><%= user.email %></td>
-			<td><%= user.job.label %></td>
-			<td><%= user.visite %></td>
+			<td><%= portfolio.user.id %></td>
+			<td><%= image_tag(portfolio.user.avatar_url, style: "max-width: 50px") if portfolio.user.avatar? %></td>
+			<td><%= portfolio.user.firstname %> <%= portfolio.user.lastname %></td>
+			<td><%= portfolio.user.email %></td>
+			<td><%= portfolio.user.job.label %></td>
+			<td><%= portfolio.user.visite %></td>
 
-			<% if user.portfolio %>
-				<%= form_for user.portfolio, url: {action: "update", controller: "portfolios"} do |f| %>
+			<% if portfolio %>
+				<%= form_for portfolio, url: {action: "update", controller: "portfolios"} do |f| %>
 				<td> <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%></td>
 
-				<td><%= image_tag(user.portfolio.picture_url, style: "max-width: 50px") if user.portfolio.picture? %></td>
+				<td><%= image_tag(portfolio.picture_url, style: "max-width: 50px") if portfolio.picture? %></td>
 				<td class="like">		
 					 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
 
@@ -59,9 +59,9 @@
 			<td class="toggle_published">
 
 				<!-- start -->
-				<% if user.portfolio %>
-					<%	if user.portfolio.published %>
-						<%= link_to admin_toggle_publish_path(id: user.portfolio.id ), remote: true, method: :get do %>
+				<% if portfolio %>
+					<%	if portfolio.published %>
+						<%= link_to admin_toggle_publish_path(id: portfolio.id ), remote: true, method: :get do %>
 							<div class="publish-switch active">
 								<div class="switch-background">
 									<div class="switch-button"></div>
@@ -69,7 +69,7 @@
 							</div>
 						<% end %>
 					<%	else %>
-						<%= link_to admin_toggle_publish_path(id: user.portfolio.id ), remote: true, method: :get do %>
+						<%= link_to admin_toggle_publish_path(id: portfolio.id ), remote: true, method: :get do %>
 							<div class="publish-switch">
 								<div class="switch-background">
 									<div class="switch-button"></div>
@@ -86,4 +86,4 @@
 <% end %>
 
 </table>
-<%= paginate @users %>
+<%= paginate @portfolios %>
