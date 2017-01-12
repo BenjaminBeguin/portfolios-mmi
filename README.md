@@ -26,7 +26,7 @@ We have to build a twitter copy-cat in Ruby on Rails.
 	- Add cities
 	- Add Job type
 
-## Dependencies
+## Dependencies (gem)
 - [Devise](https://github.com/plataformatec/devise) User management
 - [carrierwave](https://github.com/carrierwaveuploader/carrierwave) Upload management for pictures
 - [rmagick](https://github.com/rmagick) Picture proccesing
@@ -42,15 +42,7 @@ Running on [http://localhost:3000](http://localhost:3000)
 
 	rails s
 
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
+## Ruby version
 
 5.0.1
 
-* ...
