@@ -1,8 +1,5 @@
 # Portfolio-mmi project - Ruby on rails
 
-## Order
-We have to build a twitter copy-cat in Ruby on Rails.
-
 ## Features
 
 - USER

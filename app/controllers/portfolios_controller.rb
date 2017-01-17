@@ -5,13 +5,13 @@ class PortfoliosController < ApplicationController
 
     def new
         if user_signed_in?
-           if !Portfolio.where(user_id: current_user.id).first
-    	       @portfolio = Portfolio.new
-           else
+            if !Portfolio.where(user_id: current_user.id).first
+                @portfolio = Portfolio.new
+            else
                 redirect_to edit_portfolio_path
-           end
+            end
         else
-            redirect_to edit_user_registration_path   
+            redirect_to edit_user_registration_path
         end
     end
 
@@ -19,6 +19,7 @@ class PortfoliosController < ApplicationController
     def category
         @category_slug = params[:category];
         @category = Job.where(slug: @category_slug).first
+
         get_portfolios('job_id')
     end
 
@@ -28,7 +29,7 @@ class PortfoliosController < ApplicationController
         @category_slug = params[:ville];
         @category = Ville.where(slug: @category_slug).first
 
-        get_portfolios('ville_id') 
+        get_portfolios('ville_id')
     end
 
 
@@ -40,30 +41,30 @@ class PortfoliosController < ApplicationController
         end
     end
 
-    def create       
+    def create
         if user_signed_in?
             @portfolio = Portfolio.new(params.require(:portfolio).permit(:url, :picture, :picture_cache));
-            @portfolio.user_id = current_user.id 
-            if @portfolio.save 
+            @portfolio.user_id = current_user.id
+            if @portfolio.save
                 redirect_to action: "index"
             else
-                render :new  
+                render :new
             end
         end
     end
 
-    def edit       
+    def edit
         if user_signed_in?
             @portfolio = Portfolio.where(user_id: current_user.id).first;
             if !@portfolio
-                redirect_to portfolios_new_path 
+                redirect_to portfolios_new_path
             end
         else
             not_found
         end
     end
 
-    def update       
+    def update
         if user_signed_in? || current_user.admin == true
             @porfolio = Portfolio.where(user_id: current_user.id).first
 
@@ -75,28 +76,28 @@ class PortfoliosController < ApplicationController
                 if current_user.admin == true
                     @porfolio.update(params.require(:portfolio).permit(:url, :like, :picture, :picture_cache));
                 else
-                    @porfolio.update(params.require(:portfolio).permit(:url, :picture, :picture_cache));    
+                    @porfolio.update(params.require(:portfolio).permit(:url, :picture, :picture_cache));
                 end
 
-                if @porfolio.save    
+                if @porfolio.save
                     if current_user.admin == true
-                       redirect_to admin_home_path 
+                       redirect_to admin_home_path
                     else
                          redirect_to edit_user_registration_path
-                    end                
+                    end
                 else
                     if current_user.admin == true
                         redirect_to admin_edit_portfolio_path(id: params[:portfolio][:id])
                     else
                         render action: 'edit'
                     end
-                    
+
                 end
             else
                 redirect_to root_path
             end
         else
-            redirect_to new_user_session_path 
+            redirect_to new_user_session_path
         end
     end
 
@@ -105,10 +106,10 @@ class PortfoliosController < ApplicationController
         @portfolio_to_update = Portfolio.find_by_id(params[:id]) or not_found
         if @portfolio_to_update.published
             @portfolio_to_update.published = false
-        else 
+        else
             @portfolio_to_update.published = true
         end
-        
+
         @portfolio_to_update.save!
         redirect_to admin_home_path
     end
@@ -132,7 +133,7 @@ class PortfoliosController < ApplicationController
             redirect_to '/'
         else
             flash[:error] = 'You need to be signed in to vote'
-            redirect_to new_user_session_path 
+            redirect_to new_user_session_path
         end
     end
 
@@ -144,6 +145,6 @@ class PortfoliosController < ApplicationController
 
 
 
-   
+
 
 end
