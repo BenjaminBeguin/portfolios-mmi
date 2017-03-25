@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
 
   get 'villes/index'
   get 'villes/new'
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   patch 'jobs/update'
 
   get 'portfolios/new'
+  get '/sotd' => "portfolios#sotd",  :as => :sotd
   get '/:category' => "portfolios#category",  :as => :show_category
   get '/city/:ville' => "portfolios#ville",  :as => :show_city
   get 'portfolios/index'
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
   post 'portfolios/vote/:id' => "portfolios#vote", :as => :porfolios_add_vote
 
   get 'portfolio/:slug' => "users#show", :as => :show_portfolio
- 
+
   get 'users/index'
   get 'users/edit/portfolio' => "portfolios#edit", :as => :edit_portfolio
   patch 'users/edit/portfolio/update' => "portfolios#update"
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
   get '/admin/portfolios' => 'users#admin_portfolios', :as => :admin_portfolios
   get '/admin/portfolio/:id' => 'users#admin_edit_portfolio', :as => :admin_edit_portfolio
   get '/admin/portfolio/action/publish' => 'portfolios#admin_toggle_publish' , :as => :admin_toggle_publish
+  get '/admin/portfolio/action/sotd' => 'portfolios#admin_toggle_sotd' , :as => :admin_toggle_sotd
 
 
 

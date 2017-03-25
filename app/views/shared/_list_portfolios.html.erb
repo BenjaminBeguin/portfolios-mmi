@@ -6,7 +6,7 @@
 				Detail du profils
 			<% end %>
 		</li>
-		
+
 
 
 		<li><%= portfolio.user.id %></li>
@@ -15,9 +15,10 @@
 		<li><%= portfolio.user.email %></li>
 		<li>have pf = <%= portfolio.user.have_pf %></li>
 		<li>admin : <%= portfolio.user.admin %></li>
+		<li>count : <%= portfolio.count %></li>
 
 		<%= render "shared/like",  :portfolio => portfolio %>
-	
+
 
 
 		<li>
@@ -48,7 +49,7 @@
 	</div>
 
 	<br><br>
-	
+
 
 <% end %>
 

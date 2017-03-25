@@ -12,7 +12,7 @@ class VillesController < ApplicationController
   def edit
       is_admin
       @ville = Ville.find_by_id(params[:id]) or not_found;
-  
+
   end
 
   def update
@@ -20,7 +20,7 @@ class VillesController < ApplicationController
       @ville = Ville.find(params[:ville][:id])
       @ville.update(params.require(:ville).permit(:label, :slug))
 
-      if @ville.save                    
+      if @ville.save
           redirect_to villes_index_path
       else
           render action: 'edit', :id => @ville.id
@@ -28,15 +28,15 @@ class VillesController < ApplicationController
   end
 
 
-	def create 
+	def create
 
-	#todo : admin      
+	#todo : admin
 
       @ville = Ville.new(params.require(:ville).permit(:label));
-      if @ville.save 
+      if @ville.save
           redirect_to action: "index"
       else
-          render :new  
+          render :new
       end
 
   end

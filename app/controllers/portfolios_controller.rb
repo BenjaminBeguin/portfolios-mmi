@@ -23,6 +23,10 @@ class PortfoliosController < ApplicationController
         get_portfolios('job_id')
     end
 
+    def sotd
+        @portfolios = Portfolio.page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id).published.where(siteoftheday: true);
+    end
+
 
 
     def ville
@@ -108,6 +112,19 @@ class PortfoliosController < ApplicationController
             @portfolio_to_update.published = false
         else
             @portfolio_to_update.published = true
+        end
+
+        @portfolio_to_update.save!
+        redirect_to admin_home_path
+    end
+
+    def admin_toggle_sotd
+        is_admin
+        @portfolio_to_update = Portfolio.find_by_id(params[:id]) or not_found
+        if @portfolio_to_update.siteoftheday
+            @portfolio_to_update.siteoftheday = false
+        else
+            @portfolio_to_update.siteoftheday = true
         end
 
         @portfolio_to_update.save!

@@ -425,6 +425,7 @@ body .admin_header {
   margin-bottom: 40px; }
 
 body .admin_table {
+  font-size: 10px;
   text-align: center; }
   body .admin_table th {
     text-align: center; }
