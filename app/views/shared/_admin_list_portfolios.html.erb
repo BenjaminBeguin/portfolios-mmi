@@ -19,10 +19,11 @@
 			<th class="like">Like</th>
 			<th>Modifier</th>
 			<th>Published</th>
+			<th>SOTD</th>
 			<!-- <th>Profils</th> -->
 		</tr>
 	</thead>
-<% @portfolios.each do |portfolio| %>	
+<% @portfolios.each do |portfolio| %>
 		<tr>
 			<td><%= portfolio.user.id %></td>
 			<td><%= image_tag(portfolio.user.avatar_url, style: "max-width: 50px") if portfolio.user.avatar? %></td>
@@ -36,7 +37,7 @@
 				<td> <%= f.text_field :url, autofocus: true , :class => "form_input", :id => "newpost_form_title"%></td>
 
 				<td><%= image_tag(portfolio.picture_url, style: "max-width: 50px") if portfolio.picture? %></td>
-				<td class="like">		
+				<td class="like">
 					 <%= f.text_field :like, autofocus: true , :class => "form_input", :id => "newpost_form_title"%>
 
 					  <%= f.hidden_field :id %>
@@ -47,7 +48,7 @@
 				  	<%= f.submit "Update" %>
 				  </td>
 	    	<% end  %>
-				
+
 			<% else  %>
 				<td></td>
 				<td></td>
@@ -55,7 +56,7 @@
 				<td></td>
 			<% end %>
 
-			
+
 			<td class="toggle_published">
 
 				<!-- start -->
@@ -76,11 +77,32 @@
 								</div>
 							</div>
 						<% end %>
-						
+
 					<%	end %>
 				<% end %>
+			</td>
 
-
+			<td class="toggle_published">
+				<!-- start -->
+				<% if portfolio %>
+					<%	if portfolio.siteoftheday %>
+						<%= link_to admin_toggle_sotd_path(id: portfolio.id ), remote: true, method: :get do %>
+							<div class="publish-switch active">
+								<div class="switch-background">
+									<div class="switch-button"></div>
+								</div>
+							</div>
+						<% end %>
+					<%	else %>
+						<%= link_to admin_toggle_sotd_path(id: portfolio.id ), remote: true, method: :get do %>
+							<div class="publish-switch">
+								<div class="switch-background">
+									<div class="switch-button"></div>
+								</div>
+							</div>
+						<% end %>
+					<%	end %>
+				<% end %>
 			</td>
 		</tr>
 <% end %>

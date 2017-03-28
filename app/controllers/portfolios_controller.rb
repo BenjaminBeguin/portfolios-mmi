@@ -36,6 +36,27 @@ class PortfoliosController < ApplicationController
         get_portfolios('ville_id')
     end
 
+    def search_name
+        @users = User.search(params[:q]).where(portfolio_id: 0..Float::INFINITY).page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id)
+    end
+
+
+    def search_perso
+        @ville_slug = params[:ville];
+        @job_slug = params[:job];
+        @ville = Ville.where(slug: @ville_slug).first
+        @job = Job.where(slug: @job_slug).first
+
+
+        if  @ville.present? && @job.present?
+            @portfolios = Portfolio.joins(:user).where(users: {job_id: @job.id, ville_id: @ville.id}).page(params[:page]).per(PORTFOLIO_PER_PAGE).published;
+        else
+            not_found
+        end
+
+
+    end
+
 
     def get_portfolios(field)
         if  @category.present?
@@ -48,8 +69,12 @@ class PortfoliosController < ApplicationController
     def create
         if user_signed_in?
             @portfolio = Portfolio.new(params.require(:portfolio).permit(:url, :picture, :picture_cache));
+            @user = User.where(id: current_user.id).first
+
             @portfolio.user_id = current_user.id
+
             if @portfolio.save
+                @user.update(portfolio_id: @portfolio.id)
                 redirect_to action: "index"
             else
                 render :new

@@ -17,12 +17,17 @@ class User < ApplicationRecord
 	validates :email, presence: true, format: { with: /\w*@\w*\.\w*/ }, uniqueness: true
 
 	before_create :add_slug_if_not_exist
+	before_create :add_fullname
 
 
 	# ------------ Slug ---------------- #
 
 	def add_slug_if_not_exist
 	    self.slug = self.to_slug
+	end
+
+	def add_fullname
+	    self.fullname = self.firstname + " " + self.lastname
 	end
 
 	def have_pf
@@ -39,7 +44,7 @@ class User < ApplicationRecord
         ret.gsub! /['`]/,""
         ret.gsub! /\s*@\s*/, " at "
         ret.gsub! /\s*&\s*/, " and "
-        ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'  
+        ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'
         ret.gsub! /_+/,"_"
         ret.gsub! /\A[_\.]+|[_\.]+\z/,""
         ret.split('.').join('_').downcase
@@ -48,6 +53,10 @@ class User < ApplicationRecord
 
     def increment_visite
 		update(visite: visite + 1)
+	end
+
+	def self.search(search)
+		where("firstname ILIKE ? OR lastname ILIKE ? OR fullname ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
 	end
 
     #-------------- end Slug ------------- #

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'portfolios/new'
   get '/sotd' => "portfolios#sotd",  :as => :sotd
   get '/:category' => "portfolios#category",  :as => :show_category
+  get '/search/name/:q' => "portfolios#search_name",  :as => :search_name
+  get '/search/:ville/:job' => "portfolios#search_perso",  :as => :search_perso
   get '/city/:ville' => "portfolios#ville",  :as => :show_city
   get 'portfolios/index'
   post 'portfolios/create'
