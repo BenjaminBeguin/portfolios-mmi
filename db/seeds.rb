@@ -10,7 +10,7 @@
  User.delete_all
  Portfolio.delete_all
  Job.delete_all
- 
+
  Ville.update_all(like: 0);
 
 10.times do
@@ -50,8 +50,16 @@ User.create(
 end
 
 10.times do
-	Portfolio.create(
-		user_id: User.order("RANDOM()").first.id,
+
+	user_random = User.order("RANDOM()").first.id
+
+	new_portfolio = Portfolio.create(
+		user_id: user_random,
 		url: Faker::Internet.url('example.com'),
 	)
+
+	new_portfolio.save
+
+	the_user = User.where(id: user_random).first
+	the_user.update(portfolio_id: new_portfolio.id)
 end
