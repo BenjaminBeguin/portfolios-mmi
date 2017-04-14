@@ -1,23 +1,41 @@
 Rails.application.routes.draw do
 
-
-  get 'villes/index'
-  get 'villes/new'
-  post 'villes/create'
-  get 'villes/edit/:id' => "villes#edit", :as => :villes_edit
-  patch 'villes/update'
-
-
   root "portfolios#index"
 
-  get 'skills/index'
-  get 'skills/new'
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
-  get 'jobs/index'
-  get 'jobs/new'
-  get 'jobs/edit/:id' => "jobs#edit", :as => :jobs_edit
-  post 'jobs/create'
-  patch 'jobs/update'
+  scope '/admin' do
+    get '/' => 'users#admin_home', :as => :admin_home
+    scope '/portfolios' do
+      get '/' => 'users#admin_portfolios', :as => :admin_portfolios
+      get '/action/publish' => 'portfolios#admin_toggle_publish' , :as => :admin_toggle_publish
+      get '/action/sotd' => 'portfolios#admin_toggle_sotd' , :as => :admin_toggle_sotd
+      scope '/edit/:id' do
+        get '/' => 'users#admin_edit_portfolio', :as => :admin_edit_portfolio
+      end
+    end
+    scope '/ville' do
+      get '/' => 'villes#index', :as => :villes_index
+      get '/new' => 'villes#new', :as => :villes_new 
+      post '/create' => 'villes#create'
+      patch '/update' => 'villes#update'
+      scope '/edit/:id' do
+        get '/' => 'villes#edit', :as => :villes_edit
+      end
+    end
+    scope '/jobs' do
+      get '/' => 'jobs#index', :as => :jobs_index
+      get '/new' => 'jobs#new' , :as => :jobs_new
+      post '/create' => 'jobs#create'
+      patch '/update' => 'jobs#update'
+      scope '/edit/:id' do
+        get '/' => 'jobs#edit', :as => :jobs_edit
+      end
+    end
+  end
+
 
   get 'portfolios/new'
   get '/sotd' => "portfolios#sotd",  :as => :sotd
@@ -36,26 +54,8 @@ Rails.application.routes.draw do
   get 'users/edit/portfolio' => "portfolios#edit", :as => :edit_portfolio
   patch 'users/edit/portfolio/update' => "portfolios#update"
 
-
-  Rails.application.routes.draw do
-  get 'villes/index'
-
-  get 'villes/new'
-
-      devise_for :users, controllers: {
-        sessions: 'users/sessions'
-      }
-    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
-  # ------------ admin -------- #
-
-  get '/admin/home' => 'users#admin_home', :as => :admin_home
-  get '/admin/portfolios' => 'users#admin_portfolios', :as => :admin_portfolios
-  get '/admin/portfolio/:id' => 'users#admin_edit_portfolio', :as => :admin_edit_portfolio
-  get '/admin/portfolio/action/publish' => 'portfolios#admin_toggle_publish' , :as => :admin_toggle_publish
-  get '/admin/portfolio/action/sotd' => 'portfolios#admin_toggle_sotd' , :as => :admin_toggle_sotd
 
 
 
