@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
     scope '/ville' do
       get '/' => 'villes#index', :as => :villes_index
-      get '/new' => 'villes#new', :as => :villes_new 
+      get '/new' => 'villes#new', :as => :villes_new
       post '/create' => 'villes#create'
       patch '/update' => 'villes#update'
       scope '/edit/:id' do
@@ -35,6 +35,29 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+  #api
+  namespace :api do
+  	namespace :v1 do
+      resources :users, only: [:index, :create, :show, :update, :destroy]
+			resources :sessions, only: [:create]
+			mount_devise_token_auth_for 'User', at: 'auth'
+
+      get '/' => 'portfolios#index'
+      get '/:category' => "portfolios#category",  :as => :api_show_category
+      get '/city/:ville' =>"portfolios#ville",  :as => :api_show_city
+      get '/search/name/:q' => "portfolios#search_name",  :as => :api_search_name
+      get '/search/:ville/:job' => "portfolios#search_perso",  :as => :api_search_perso
+    end
+  end
+  #
+  # scope '/api/v1' do
+  #   get '/' => "portfolios#index", :as => :api_index
+  #   scope '/portfolios' do
+  #
+  #   end
+  # end
 
 
   get 'portfolios/new'

@@ -33,6 +33,19 @@ gem 'jbuilder', '~> 2.5'
 # devise
 gem 'devise'
 
+#api
+gem 'devise_token_auth'
+gem 'omniauth'
+gem 'pundit'
+gem 'kaminari'
+gem 'redis-throttle', git: 'git://github.com/lelylan/redis-throttle.git'
+gem 'rack-cors'
+gem 'apipie-rails'
+gem 'factory_girl_rails'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-9-stable'
+
 #image
 gem 'carrierwave', '~> 1.0'
 

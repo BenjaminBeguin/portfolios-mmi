@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 		@category = Ville.where(slug: @category_slug).first
 
 		get_user('ville_id')
-		
+
 	end
 
 	def get_user(field)
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 		is_admin
 	    @portfolio = Portfolio.where(id: params[:id]).first;
 	    if !@portfolio
-	        redirect_to portfolios_new_path 
+	        redirect_to portfolios_new_path
 	    end
 	end
 
