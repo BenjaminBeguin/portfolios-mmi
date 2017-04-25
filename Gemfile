@@ -48,6 +48,7 @@ gem 'active_model_serializers', github: 'rails-api/active_model_serializers', br
 
 #image
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64'
 
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem "mini_magick"

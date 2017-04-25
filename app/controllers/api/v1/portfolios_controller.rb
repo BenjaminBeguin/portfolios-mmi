@@ -1,6 +1,6 @@
 class Api::V1::PortfoliosController < Api::V1::BaseController
-	before_action :authenticate_user!, only: [:create, :update]
-	before_filter :find_posts, only: [:show, :update, :delete]
+	before_action :authenticate_user!, only: [:update, :create, :vote]
+	#before_filter :find_posts, only: [:show, :update, :delete]
 
 	api :GET, "/", "Show all posts"
 	def index
@@ -13,29 +13,15 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
       render_users(@users)
   end
 
-  if user_signed_in?
-      @portfolio = Portfolio.new(params.require(:portfolio).permit(:url, :picture, :picture_cache));
-      @user = User.where(id: current_user.id).first
-
-      @portfolio.user_id = current_user.id
-
-      if @portfolio.save
-          @user.update(portfolio_id: @portfolio.id)
-          redirect_to action: "index"
-      else
-          render :new
-      end
-  end
-
   def create
 		@json = JSON.parse(request.body.read)
     @user = User.where(id: current_user.id).first
 	    if @portfolio.present?
-	      render nothing: true, status: :conflict
+	      render json: {error: "Portfolio already created"}, status: :conflict
       else
         @portfolio = Portfolio.new(params.require(:portfolio).permit(:url, :picture, :picture_cache));
         @portfolio.user_id = current_user.id;
-        
+
   			if @portfolio.save
           @user.update(portfolio_id: @portfolio.id)
   				render json: @portfolio
@@ -44,6 +30,22 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
   			end
 		end
 	end
+
+  def update
+      @json = JSON.parse(request.body.read)
+      @portfolio = Portfolio.where(user_id: current_user.id).first
+      if @portfolio
+            @portfolio.update(params.require(:portfolio).permit(:url, :picture, :picture_cache));
+
+          if @portfolio.save
+              render json: @portfolio
+          else
+              render body: "error"
+          end
+      else
+          render body: "error"
+      end
+  end
 
   def search_perso
       @ville_slug = params[:ville];
@@ -84,6 +86,22 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
           not_found
       end
       render_portfolios(portfolios)
+  end
+
+  def vote
+      @portfolio = Portfolio.find(params[:id])
+      already_voted = Like.where(user_id: current_user.id , portfolio_id: @portfolio.id).first;
+      if !already_voted
+          @portfolio.increment_like
+          @portfolio.user.ville.increment_like
+          @vote = Like.create(user_id: current_user.id , portfolio_id: @portfolio.id)
+      else
+          @portfolio.decrement_like
+          @portfolio.user.ville.decrement_like
+
+          already_voted.destroy
+      end
+      render json: @portfolio
   end
 
   def render_portfolios(portfolios)

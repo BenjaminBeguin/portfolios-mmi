@@ -45,10 +45,25 @@ Rails.application.routes.draw do
 			mount_devise_token_auth_for 'User', at: 'auth'
 
       get '/' => 'portfolios#index'
-      get '/:category' => "portfolios#category",  :as => :api_show_category
+      get '/category/:category' => "portfolios#category",  :as => :api_show_category
       get '/city/:ville' =>"portfolios#ville",  :as => :api_show_city
-      get '/search/name/:q' => "portfolios#search_name",  :as => :api_search_name
-      get '/search/:ville/:job' => "portfolios#search_perso",  :as => :api_search_perso
+      scope '/search' do
+        get '/name/:q' => "portfolios#search_name",  :as => :api_search_name
+        get '/:ville/:job' => "portfolios#search_perso",  :as => :api_search_perso
+      end
+      scope '/users' do
+        get '/' => "users#index",  :as => :api_users_index
+      end
+      scope '/portfolio' do
+				get '/' => 'portfolios#index'
+				post '/' => 'portfolios#create'
+				scope '/:id' do
+					get '/' => 'portfolios#show'
+					post '/' => 'portfolios#vote'
+					put '/' => 'portfolios#update'
+					# delete '/' => 'portfolio#delete'
+				end
+			end
     end
   end
   #

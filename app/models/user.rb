@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
 	before_create :add_slug_if_not_exist
 	before_create :add_fullname
-
+	has_one :portfolio
 
 	# ------------ Slug ---------------- #
 
