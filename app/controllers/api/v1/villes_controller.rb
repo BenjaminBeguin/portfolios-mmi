@@ -2,7 +2,7 @@ class Api::V1::VillesController < Api::V1::BaseController
 
 	api :GET, "/", "Show all posts"
 	def index
-	    cities = Ville.all
+	    cities = Ville.all.order(like: :desc)
 			render json: cities
 	end
 
