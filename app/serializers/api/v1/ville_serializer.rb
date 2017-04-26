@@ -1,11 +1,5 @@
-class Api::V1::PortfolioSerializer < ActiveModel::Serializer
-    attributes  :id,
-                :url,
-                :picture,
-                :visite,
-                :user
-
-    has_one :user
+class Api::V1::VilleSerializer < ActiveModel::Serializer
+    attributes  :id, :slug, :label, :like
 
     def created_at
         object.created_at.in_time_zone.iso8601 if object.created_at

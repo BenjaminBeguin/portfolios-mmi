@@ -64,6 +64,12 @@ Rails.application.routes.draw do
 					# delete '/' => 'portfolio#delete'
 				end
 			end
+      scope '/cities' do
+				get '/' => 'villes#index'
+			end
+      scope '/jobs/' do
+				get '/' => 'jobs#index'
+			end
     end
   end
   #

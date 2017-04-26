@@ -29,7 +29,7 @@
 			<td><%= image_tag(user.avatar_url, style: "max-width: 50px") if user.avatar? %></td>
 			<td><%= user.firstname %> <%= user.lastname %></td>
 			<td><%= user.email %></td>
-			<td><%= user.job.label %></td>
+			<td><%= user.job.label if user.job %></td>
 			<td><%= user.visite %></td>
 
 			<% if user.portfolio %>
