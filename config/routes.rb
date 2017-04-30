@@ -45,8 +45,8 @@ Rails.application.routes.draw do
 			mount_devise_token_auth_for 'User', at: 'auth'
 
       get '/' => 'portfolios#index'
-      get '/category/:category' => "portfolios#category",  :as => :api_show_category
       get '/city/:ville' =>"portfolios#ville",  :as => :api_show_city
+      get '/job/:category' =>"portfolios#category",  :as => :api_show_job
       scope '/search' do
         get '/name/:q' => "portfolios#search_name",  :as => :api_search_name
         get '/:ville/:job' => "portfolios#search_perso",  :as => :api_search_perso
@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 			end
       scope '/cities' do
 				get '/' => 'villes#index'
+				get '/all' => 'villes#all'
 			end
       scope '/jobs/' do
 				get '/' => 'jobs#index'

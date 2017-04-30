@@ -62,4 +62,6 @@ end
 
 	the_user = User.where(id: user_random).first
 	the_user.update(portfolio_id: new_portfolio.id)
+  ville = Ville.where(id: new_portfolio.user.ville_id).first
+  ville.have_portfolio
 end

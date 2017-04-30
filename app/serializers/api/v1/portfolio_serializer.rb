@@ -3,6 +3,7 @@ class Api::V1::PortfolioSerializer < ActiveModel::Serializer
                 :url,
                 :picture,
                 :visite,
+                :like,
                 :user
 
     has_one :user

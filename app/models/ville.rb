@@ -19,12 +19,15 @@ class Ville < ApplicationRecord
 		ret.gsub! /['`]/,""
 		ret.gsub! /\s*@\s*/, " at "
 		ret.gsub! /\s*&\s*/, " and "
-		ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'  
+		ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '_'
 		ret.gsub! /_+/,"_"
 		ret.gsub! /\A[_\.]+|[_\.]+\z/,""
 		ret.split('.').join('_').downcase
 	 end
 
+	 def have_portfolio
+	 		update(have_portfolio: true)
+	 end
 
 	def increment_like
 	 	update(like: like + 1)
@@ -35,4 +38,3 @@ class Ville < ApplicationRecord
 	end
 
 end
-

@@ -74,7 +74,10 @@ class PortfoliosController < ApplicationController
             @portfolio.user_id = current_user.id
 
             if @portfolio.save
+                @ville = Ville.where(id: @portfolio.user.ville_id).first
+                @ville.update(have_portfolio: true)
                 @user.update(portfolio_id: @portfolio.id)
+
                 redirect_to action: "index"
             else
                 render :new

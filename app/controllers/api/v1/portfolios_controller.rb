@@ -1,5 +1,6 @@
 class Api::V1::PortfoliosController < Api::V1::BaseController
 	before_action :authenticate_user!, only: [:update, :create, :vote]
+  skip_before_filter  :verify_authenticity_token
 	#before_filter :find_posts, only: [:show, :update, :delete]
 
 	api :GET, "/", "Show all posts"
@@ -23,6 +24,8 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
         @portfolio.user_id = current_user.id;
 
   			if @portfolio.save
+          @ville = Ville.where(id: @portfolio.user.ville_id).first
+          @ville.update(have_portfolio: true)
           @user.update(portfolio_id: @portfolio.id)
   				render json: @portfolio
   			else

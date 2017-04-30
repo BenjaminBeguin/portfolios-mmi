@@ -2,7 +2,12 @@ class Api::V1::VillesController < Api::V1::BaseController
 
 	api :GET, "/", "Show all posts"
 	def index
-	    cities = Ville.all.order(like: :desc)
+	    cities = Ville.where(have_portfolio: true).order(like: :desc)
+			render json: cities
+	end
+
+	def all
+	    cities = Ville.order(like: :desc)
 			render json: cities
 	end
 
