@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       scope '/portfolio' do
 				get '/' => 'portfolios#index'
 				post '/' => 'portfolios#create'
+				post '/me' => 'portfolios#me'
 				scope '/:id' do
 					get '/' => 'portfolios#show'
 					post '/' => 'portfolios#vote'

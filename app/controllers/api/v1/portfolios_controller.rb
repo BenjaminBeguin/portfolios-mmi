@@ -1,5 +1,5 @@
 class Api::V1::PortfoliosController < Api::V1::BaseController
-	before_action :authenticate_user!, only: [:update, :create, :vote]
+	before_action :authenticate_user!, only: [:update, :create, :vote, :me]
   skip_before_filter  :verify_authenticity_token
 	#before_filter :find_posts, only: [:show, :update, :delete]
 
@@ -14,8 +14,14 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
       render_users(@users)
   end
 
+  def me
+      portfolio = Portfolio.where(user_id: current_user.id)
+      render_portfolios(portfolio)
+  end
+
   def create
 		@json = JSON.parse(request.body.read)
+		@portfolio = Portfolio.where(user_id: current_user.id).first
     @user = User.where(id: current_user.id).first
 	    if @portfolio.present?
 	      render json: {error: "Portfolio already created"}, status: :conflict
