@@ -27,15 +27,6 @@ Job.create(label: "Référenceur", slug: "referenceur" )
 Job.create(label: "Intégrateur", slug: "integrateur" )
 
 
-User.create(
-		firstname: "Admin",
-		lastname: "Admin",
-		email: "beguin.ben@gmail.com",
-		password: 'adminpassword',
-		job_id: Job.order("RANDOM()").first.id,
-		ville_id: Ville.order("RANDOM()").first.id,
-		admin: true
-	)
 
 
 50.times do
@@ -65,3 +56,14 @@ end
   ville = Ville.where(id: new_portfolio.user.ville_id).first
   ville.have_portfolio
 end
+
+
+User.create(
+		firstname: "Admin",
+		lastname: "Admin",
+		email: "beguin.ben@gmail.com",
+		password: 'adminpassword',
+		job_id: Job.order("RANDOM()").first.id,
+		ville_id: Ville.order("RANDOM()").first.id,
+		admin: true
+	)

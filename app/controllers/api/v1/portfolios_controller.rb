@@ -15,8 +15,8 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
   end
 
   def me
-      portfolio = Portfolio.where(user_id: current_user.id)
-      render_portfolios(portfolio)
+      user = User.where(id: current_user.id)
+      render_users(user)
   end
 
   def create
@@ -36,7 +36,7 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
   				render json: @portfolio
   			else
   			 	render nothing: true, status: :bad_request
-  			end
+	  		end
 		end
 	end
 
