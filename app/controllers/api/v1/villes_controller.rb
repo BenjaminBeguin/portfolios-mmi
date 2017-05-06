@@ -7,7 +7,7 @@ class Api::V1::VillesController < Api::V1::BaseController
 	end
 
 	def all
-	    cities = Ville.order(like: :desc)
+	    cities = Ville.order(:label)
 			render json: cities
 	end
 

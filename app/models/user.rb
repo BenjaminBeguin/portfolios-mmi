@@ -6,7 +6,7 @@ class User < ApplicationRecord
 	     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
  include DeviseTokenAuth::Concerns::User
 
-
+	after_update :add_fullname
 	has_many :skills
 	has_one :portfolio
 

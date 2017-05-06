@@ -57,11 +57,12 @@ Rails.application.routes.draw do
       scope '/portfolio' do
 				get '/' => 'portfolios#index'
 				post '/' => 'portfolios#create'
+        put '/' => 'portfolios#update'
 				post '/me' => 'portfolios#me'
 				scope '/:id' do
 					get '/' => 'portfolios#show'
 					post '/' => 'portfolios#vote'
-					put '/' => 'portfolios#update'
+					# put '/' => 'portfolios#update'
 					# delete '/' => 'portfolio#delete'
 				end
 			end

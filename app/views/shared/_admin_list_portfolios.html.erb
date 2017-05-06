@@ -13,6 +13,7 @@
 			<th>Nom</th>
 			<th>Email</th>
 			<th>Profils</th>
+			<th>Villes</th>
 			<th>Visites</th>
 			<th>portfolio</th>
 			<th>image</th>
@@ -30,6 +31,7 @@
 			<td><%= portfolio.user.firstname %> <%= portfolio.user.lastname %></td>
 			<td><%= portfolio.user.email %></td>
 			<td><%= portfolio.user.job.label if portfolio.user.job %></td>
+			<td><%= portfolio.user.ville.label if portfolio.user.ville %></td>
 			<td><%= portfolio.user.visite %></td>
 
 			<% if portfolio %>
