@@ -6,6 +6,8 @@ class User < ApplicationRecord
 	     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
  include DeviseTokenAuth::Concerns::User
 
+ 	mount_base64_uploader :avatar, PortfolioUploader, file_name: -> (u) { u.firstname.split('.')[0] + rand(0..300).to_s }
+
 	after_update :add_fullname
 	has_many :skills
 	has_one :portfolio
