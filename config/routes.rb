@@ -58,6 +58,7 @@ Rails.application.routes.draw do
 				get '/' => 'portfolios#index'
 				post '/' => 'portfolios#create'
         put '/' => 'portfolios#update'
+        delete '/' => 'portfolios#delete'
 				post '/me' => 'portfolios#me'
 				scope '/:id' do
 					get '/' => 'portfolios#show'

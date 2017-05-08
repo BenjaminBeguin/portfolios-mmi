@@ -1,5 +1,5 @@
 class Api::V1::PortfoliosController < Api::V1::BaseController
-	before_action :authenticate_user!, only: [:update, :create, :vote, :me]
+	before_action :authenticate_user!, only: [:update, :create, :vote, :me , :delete]
   skip_before_filter  :verify_authenticity_token
 	#before_filter :find_posts, only: [:show, :update, :delete]
 
@@ -48,6 +48,19 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
 
           if @portfolio.save
               render json: @portfolio
+          else
+              render body: "error"
+          end
+      else
+          render body: "error"
+      end
+  end
+
+  def delete
+      @portfolio = Portfolio.where(user_id: current_user.id).first
+      if @portfolio
+          if @portfolio.delete
+              render body: "deleted"
           else
               render body: "error"
           end
