@@ -9,6 +9,16 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
       render_portfolios(portfolios)
 	end
 
+	def recent
+	    portfolios = Portfolio.order(:created_at).limit(params[:limit]).published;
+      render_portfolios(portfolios)
+	end
+
+	def bests
+	    portfolios = Portfolio.where(created_at: (Date.today - 1.week)..Date.today.midnight).order(count: :desc).limit(params[:limit]).published;
+      render_portfolios(portfolios)
+	end
+
   def search_name
       @users = User.search(params[:q]).where(portfolio_id: 0..Float::INFINITY).page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id)
       render_users(@users)
@@ -18,6 +28,17 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
       user = User.where(id: current_user.id)
       render_users(user)
   end
+
+	def portfolio_of_the_day
+			portfolio = Portfolio.where(created_at: (Date.today - 1.week)..Date.today.midnight).order(count: :desc).published.first
+			portfolio.update(siteoftheday: true)
+			render json: portfolio
+	end
+
+	def portfolio_of_the_days
+			portfolios = Portfolio.where(siteoftheday: true).order(count: :desc).published
+			render_portfolios(portfolios)
+	end
 
   def create
 		@json = JSON.parse(request.body.read)
@@ -68,6 +89,7 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
           render body: "error"
       end
   end
+
 
   def search_perso
       @ville_slug = params[:ville];

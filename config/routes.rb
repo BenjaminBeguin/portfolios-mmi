@@ -56,6 +56,10 @@ Rails.application.routes.draw do
       end
       scope '/portfolio' do
 				get '/' => 'portfolios#index'
+				get '/sotd' => 'portfolios#portfolio_of_the_day'
+				get '/sotds' => 'portfolios#portfolio_of_the_days'
+				get '/recent/:limit' => 'portfolios#recent'
+				get '/bests/:limit' => 'portfolios#bests'
 				post '/' => 'portfolios#create'
         put '/' => 'portfolios#update'
         delete '/' => 'portfolios#delete'
