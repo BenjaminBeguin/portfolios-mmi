@@ -19,10 +19,21 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
       render_portfolios(portfolios)
 	end
 
-  def search_name
+	def search_name
       @users = User.search(params[:q]).where(portfolio_id: 0..Float::INFINITY).page(params[:page]).per(PORTFOLIO_PER_PAGE).order(:id)
       render_users(@users)
   end
+
+	def liked_portfolio
+      liked_portfolio = Like.where(user_id: 1627);
+      render json: liked_portfolio
+  end
+
+	def single
+			single = User.where(slug: params[:id]).first;
+			portfolio = Portfolio.where(id: single.portfolio_id).first;
+			render json: portfolio
+	end
 
   def me
       user = User.where(id: current_user.id)

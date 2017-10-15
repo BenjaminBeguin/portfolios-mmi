@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       scope '/portfolio' do
 				get '/' => 'portfolios#index'
 				get '/sotd' => 'portfolios#portfolio_of_the_day'
+				get '/liked' => 'portfolios#liked_portfolio'
 				get '/sotds' => 'portfolios#portfolio_of_the_days'
 				get '/recent/:limit' => 'portfolios#recent'
 				get '/bests/:limit' => 'portfolios#bests'
@@ -65,7 +66,7 @@ Rails.application.routes.draw do
         delete '/' => 'portfolios#delete'
 				post '/me' => 'portfolios#me'
 				scope '/:id' do
-					get '/' => 'portfolios#show'
+					get '/' => 'portfolios#single'
 					post '/' => 'portfolios#vote'
 					# put '/' => 'portfolios#update'
 					# delete '/' => 'portfolio#delete'

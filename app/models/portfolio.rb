@@ -8,8 +8,8 @@ class Portfolio < ApplicationRecord
 
 	cattr_accessor :current_user
 
-	validates :user_id, presence: true, uniqueness: true
-	validates :url, presence: true, :if => :check_url
+	validates :user_id, presence: true, uniqueness: true							
+	validates :url, presence: true, :if => :check_url							
 
 	scope :published, -> { where(published: true) }
 

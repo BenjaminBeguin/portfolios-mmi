@@ -2,6 +2,10 @@ class Api::V1::UserSerializer < ActiveModel::Serializer
     attributes  :id,
                 :ville,
                 :job,
+                :fullname,
+                :firstname,
+                :lastname,
+                :slug,
                 :portfolio,
 
     def created_at
