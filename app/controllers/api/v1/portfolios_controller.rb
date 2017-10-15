@@ -42,6 +42,7 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
 
 	def portfolio_of_the_day
 			portfolio = Portfolio.where(created_at: (Date.today - 1.week)..Date.today.midnight).order(count: :desc).published.first
+			portfolio = Portfolio.order(count: :desc).published.first
 			portfolio.update(siteoftheday: true)
 			render json: portfolio
 	end
