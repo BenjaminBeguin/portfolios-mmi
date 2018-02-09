@@ -41,16 +41,17 @@ gem 'kaminari'
 gem 'redis-throttle', git: 'git://github.com/lelylan/redis-throttle.git'
 gem 'rack-cors'
 gem 'apipie-rails'
-gem 'factory_girl_rails'
+gem 'factory_bot'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-9-stable'
 
 #image
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 gem 'carrierwave-base64'
+gem "carrierwave-mongoid"
 
-gem 'rmagick', '~> 2.15', '>= 2.15.4'
+# gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem "mini_magick"
 
 # faker

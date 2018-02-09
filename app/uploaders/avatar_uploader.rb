@@ -8,7 +8,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-  
+
   include CarrierWave::MiniMagick
 
   version :small do

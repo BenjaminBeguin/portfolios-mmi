@@ -68,7 +68,7 @@ class Api::V1::PortfoliosController < Api::V1::BaseController
           @user.update(portfolio_id: @portfolio.id)
   				render json: @portfolio
   			else
-  			 	render nothing: true, status: :bad_request
+  			 	render json: @portfolio
 	  		end
 		end
 	end

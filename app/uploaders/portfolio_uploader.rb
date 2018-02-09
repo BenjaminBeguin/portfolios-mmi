@@ -8,7 +8,7 @@ class PortfolioUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-    include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
 
   version :small do
